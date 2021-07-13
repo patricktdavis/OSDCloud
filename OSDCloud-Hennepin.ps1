@@ -53,28 +53,27 @@ function Invoke-OSDCloud {
     Write-Host -ForegroundColor Cyan "Starting Hennepin County's Custom OSDCloud ..."
     Start-Sleep -Seconds 5
     Clear-Host
-    Write-Host '===================== Main Menu =======================' -ForegroundColor Yellow
-    Write-Host '================ Hennepin County SSD =================' -ForegroundColor Yellow
+    Write-Host '===================== Main Menu ===========================' -ForegroundColor Yellow
+    Write-Host '================== Hennepin County SSD ====================' -ForegroundColor Yellow
     Write-Host '== Please Put in a Assyst ticket if there are any issues ==' -ForegroundColor Yellow
-    Write-Host '=======================================================' -ForegroundColor Yellow
+    Write-Host '===========================================================' -ForegroundColor Yellow
     Write-Host '1: Zero-Touch Win10 20H2 | English | Enterprise'-ForegroundColor Yellow
     Write-Host "2: Exit`n"-ForegroundColor Yellow
     $OSDinput = Read-Host 'Please make a selection'
 
-    #Make sure I have the latest OSD Content
+    #Installing latest OSD Content
     Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
     Install-Module OSD -Force
 
     Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
     Import-Module OSD -Force
 
-    #Start OSDCloud ZTI the RIGHT way
-    Write-Host -ForegroundColor Cyan 'Start OSDCloud with MY Parameters'
+    #Start OSDCloud
+    Write-Host -ForegroundColor Cyan 'Start Deploying the machine with the following selections'
     switch ($OSDinput) {
         '1' { Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI }
         '2' { Exit }
     }
-
 }
 
 
