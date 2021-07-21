@@ -45,7 +45,8 @@ function Invoke-OSDCloud {
     }
 
 
-    if ((Get-MyComputerModel) -match '857F') {
+    if ((Get-MyComputerProduct) -match '857F') {
+        Write-Host -ForegroundColor Cyan 'Setting Font to 36x'
         Set-Location HKCU:\Console
         New-Item '.\%SystemRoot%_System32_WindowsPowerShell_v1.0_powershell.exe'
         Set-Location '.\%SystemRoot%_System32_WindowsPowerShell_v1.0_powershell.exe'
