@@ -52,9 +52,6 @@ function Invoke-OSDCloud {
         Set-ItemProperty . FontWeight -type DWORD -Value 0x00000190 -Force
     }
 
-    $shell = New-Object -ComObject 'Shell.Application'
-    $shell.minimizeall()
-
     Add-Type -AssemblyName System.Windows.Forms
     Add-Type -AssemblyName System.Drawing
 
@@ -104,8 +101,6 @@ function Invoke-OSDCloud {
         Import-Module OSD -Force
         Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
     }
-    $shell = New-Object -ComObject 'Shell.Application'
-    $shell.undominimizeall()
 }
 
 #=============================================================================
