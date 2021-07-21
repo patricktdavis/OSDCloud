@@ -108,8 +108,11 @@ function Invoke-OSDCloud {
 #=============================================================================
 #region EXECUTION
 #=============================================================================
-
+$shell = New-Object -ComObject "Shell.Application"
+$shell.minimizeall()
 Invoke-OSDCloud
+$shell = New-Object -ComObject "Shell.Application"
+$shell.undominimizeall()
 #Restart from WinPE
 Write-Host -ForegroundColor Cyan 'Restarting in 20 seconds!'
 Start-Sleep -Seconds 20
