@@ -50,10 +50,10 @@ function Invoke-OSDCloud {
         Set-Location HKCU:\Console
         New-Item '.\%SystemRoot%_System32_WindowsPowerShell_v1.0_powershell.exe'
         Set-Location '.\%SystemRoot%_System32_WindowsPowerShell_v1.0_powershell.exe'
-        Set-ItemProperty . FaceName -type STRING -Value 'Lucida Console'
-        Set-ItemProperty . FontFamily -type DWORD -Value 0x00000036
-        Set-ItemProperty . FontSize -type DWORD -Value 0x00240000
-        Set-ItemProperty . FontWeight -type DWORD -Value 0x00000190
+        Set-ItemProperty . FaceName -type STRING -Value 'Lucida Console' -force
+        Set-ItemProperty . FontFamily -type DWORD -Value 0x00000036 -force
+        Set-ItemProperty . FontSize -type DWORD -Value 0x00240000 -force
+        Set-ItemProperty . FontWeight -type DWORD -Value 0x00000190 -force
     }
 
     Write-Host -ForegroundColor Cyan "Starting Hennepin County's Custom OSDCloud ..."
