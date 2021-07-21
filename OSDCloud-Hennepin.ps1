@@ -48,8 +48,6 @@ function Invoke-OSDCloud {
     if ((Get-MyComputerProduct) -match '857F') {
         Write-Host -ForegroundColor Cyan 'Setting Font to 36x'
         Set-Location 'HKCU:\Console\%SystemRoot%_System32_WindowsPowerShell_v1.0_powershell.exe'
-        Set-ItemProperty . FaceName -type STRING -Value 'Lucida Console' -force
-        Set-ItemProperty . FontFamily -type DWORD -Value 0x00000036 -force
         Set-ItemProperty . FontSize -type DWORD -Value 0x00240000 -force
         Set-ItemProperty . FontWeight -type DWORD -Value 0x00000190 -force
     }
