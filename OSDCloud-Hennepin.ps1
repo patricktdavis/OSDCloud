@@ -112,7 +112,7 @@ function Invoke-OSDCloud {
 
     $InstallWindows = New-Object system.Windows.Forms.Button
     $InstallWindows.text = 'Install Windows 10'
-    $InstallWindows.width = 257
+    $InstallWindows.width = 263
     $InstallWindows.height = 43
     $InstallWindows.location = New-Object System.Drawing.Point(319,283)
     $InstallWindows.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold -bor [System.Drawing.FontStyle]::Underline))
