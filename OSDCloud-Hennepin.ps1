@@ -121,7 +121,7 @@ function Invoke-OSDCloud {
     $PopupBox.controls.AddRange(@($InstallWindows,$Title,$OSDescription,$OperatingSystemLabel,$SerialDescription,$SerialLabel,$MakeASelection,$ExitButton))
     $Result = $PopupBox.ShowDialog()
 
-    If ($Result -eq 'OK') {
+    If ($Result -eq [System.Windows.Forms.DialogResult]::OK) {
         #Installing latest OSD Content
         Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
         Install-Module OSD -Force
