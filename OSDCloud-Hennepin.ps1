@@ -119,9 +119,9 @@ function Invoke-OSDCloud {
     $ExitButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
 
     $PopupBox.controls.AddRange(@($InstallWindows,$Title,$OSDescription,$OperatingSystemLabel,$SerialDescription,$SerialLabel,$MakeASelection,$ExitButton))
-    [void]$PopupBox.ShowDialog()
+    $Result = $PopupBox.ShowDialog()
 
-    If ($PopupBox -eq 'OK') {
+    If ($Result -eq 'OK') {
         #Installing latest OSD Content
         Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
         Install-Module OSD -Force
