@@ -43,6 +43,8 @@ function Invoke-OSDCloud {
         Set-DisRes 1600
     }
 
+    $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
+
     Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.Application]::EnableVisualStyles()
 
@@ -85,7 +87,7 @@ function Invoke-OSDCloud {
     $SerialDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
     $SerialLabel = New-Object system.Windows.Forms.Label
-    $SerialLabel.text = 'Serial'
+    $SerialLabel.text = "$Serial"
     $SerialLabel.AutoSize = $true
     $SerialLabel.width = 25
     $SerialLabel.height = 10
@@ -116,7 +118,10 @@ function Invoke-OSDCloud {
     $InstallWindows.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold -bor [System.Drawing.FontStyle]::Underline))
     $ExitButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
 
-    If ($Result -eq 'OK') {
+    $PopupBox.controls.AddRange(@($InstallWindows,$Title,$OSDescription,$OperatingSystemLabel,$SerialDescription,$SerialLabel,$MakeASelection,$ExitButton))
+    [void]$PopupBox.ShowDialog()
+
+    If ($PopupBox -eq 'OK') {
         #Installing latest OSD Content
         Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
         Install-Module OSD -Force
@@ -125,9 +130,6 @@ function Invoke-OSDCloud {
         Import-Module OSD -Force
         Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
     }
-
-    $PopupBox.controls.AddRange(@($InstallWindows,$Title,$OSDescription,$OperatingSystemLabel,$SerialDescription,$SerialLabel,$MakeASelection,$ExitButton))
-    [void]$PopupBox.ShowDialog()
 }
 
 #=============================================================================
