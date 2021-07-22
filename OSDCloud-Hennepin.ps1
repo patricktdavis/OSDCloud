@@ -116,7 +116,7 @@ function Invoke-OSDCloud {
     $InstallWindows.height = 43
     $InstallWindows.location = New-Object System.Drawing.Point(319,283)
     $InstallWindows.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold -bor [System.Drawing.FontStyle]::Underline))
-    $ExitButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+    $InstallWindows.DialogResult = [System.Windows.Forms.DialogResult]::OK
 
     $PopupBox.controls.AddRange(@($InstallWindows,$Title,$OSDescription,$OperatingSystemLabel,$SerialDescription,$SerialLabel,$MakeASelection,$ExitButton))
     $Result = $PopupBox.ShowDialog()
