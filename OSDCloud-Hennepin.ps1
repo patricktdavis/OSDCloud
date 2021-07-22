@@ -56,7 +56,6 @@ function Invoke-OSDCloud {
 
     $Title = New-Object system.Windows.Forms.Label
     $Title.text = 'Welcome to Hennepin County Imaging'
-    $Title.AutoSize = $true
     $Title.width = 25
     $Title.height = 10
     $Title.location = New-Object System.Drawing.Point(20,11)
@@ -64,7 +63,6 @@ function Invoke-OSDCloud {
 
     $OSDescription = New-Object system.Windows.Forms.Label
     $OSDescription.text = 'The following Operating System will be installed: '
-    $OSDescription.AutoSize = $true
     $OSDescription.width = 25
     $OSDescription.height = 10
     $OSDescription.location = New-Object System.Drawing.Point(32,73)
@@ -72,7 +70,6 @@ function Invoke-OSDCloud {
 
     $OperatingSystemLabel = New-Object system.Windows.Forms.Label
     $OperatingSystemLabel.text = 'Windows 10 Enterprise 20H2'
-    $OperatingSystemLabel.AutoSize = $true
     $OperatingSystemLabel.width = 25
     $OperatingSystemLabel.height = 10
     $OperatingSystemLabel.location = New-Object System.Drawing.Point(40,103)
@@ -80,7 +77,6 @@ function Invoke-OSDCloud {
 
     $SerialDescription = New-Object system.Windows.Forms.Label
     $SerialDescription.text = 'This Machines Serial Number is:'
-    $SerialDescription.AutoSize = $true
     $SerialDescription.width = 25
     $SerialDescription.height = 10
     $SerialDescription.location = New-Object System.Drawing.Point(33,141)
@@ -88,7 +84,6 @@ function Invoke-OSDCloud {
 
     $SerialLabel = New-Object system.Windows.Forms.Label
     $SerialLabel.text = "$Serial"
-    $SerialLabel.AutoSize = $true
     $SerialLabel.width = 25
     $SerialLabel.height = 10
     $SerialLabel.location = New-Object System.Drawing.Point(40,175)
@@ -96,7 +91,6 @@ function Invoke-OSDCloud {
 
     $MakeASelection = New-Object system.Windows.Forms.Label
     $MakeASelection.text = 'Please make a selection below:'
-    $MakeASelection.AutoSize = $true
     $MakeASelection.width = 25
     $MakeASelection.height = 10
     $MakeASelection.location = New-Object System.Drawing.Point(33,238)
