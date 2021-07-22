@@ -40,7 +40,8 @@ function Invoke-OSDCloud {
 
     if ((Get-MyComputerModel) -match 'Virtual') {
         Write-Host -ForegroundColor Cyan 'Setting Display Resolution to 1600x'
-        Set-DisRes 1600
+        #Set-DisRes 1600
+        Set-DisRes 1080p
     }
 
     $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
