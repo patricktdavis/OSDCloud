@@ -114,6 +114,7 @@ function Invoke-NewBoxHD {
     $InstallWindows.DialogResult = [System.Windows.Forms.DialogResult]::OK
 
     $PopupBox.controls.AddRange(@($InstallWindows,$Title,$OSDescription,$OperatingSystemLabel,$SerialDescription,$SerialLabel,$MakeASelection,$ExitButton))
+    $Result = $PopupBox.ShowDialog()
 
     If ($Result -eq [System.Windows.Forms.DialogResult]::OK) {
         #Installing latest OSD Content
@@ -222,6 +223,7 @@ function Invoke-NewBox4k {
     $InstallWindows.DialogResult = [System.Windows.Forms.DialogResult]::OK
 
     $PopupBox.controls.AddRange(@($InstallWindows,$Title,$OSDescription,$OperatingSystemLabel,$SerialDescription,$SerialLabel,$MakeASelection,$ExitButton))
+    $Result = $PopupBox.ShowDialog()
 
     If ($Result -eq [System.Windows.Forms.DialogResult]::OK) {
         #Installing latest OSD Content
