@@ -50,7 +50,7 @@ function Invoke-NewBoxHD {
     $PopupBox.Controlbox = $false
 
     $Title = New-Object system.Windows.Forms.Label
-    $Title.text = 'Welcome to Hennepin County Imaging'
+    $Title.text = 'HDWelcome to Hennepin County Imaging'
     $Title.AutoSize = $true
     $Title.width = 25
     $Title.height = 10
@@ -159,7 +159,7 @@ function Invoke-NewBox4k {
     $PopupBox.Controlbox = $false
 
     $Title = New-Object system.Windows.Forms.Label
-    $Title.text = 'Welcome to Hennepin County Imaging'
+    $Title.text = '4KWelcome to Hennepin County Imaging'
     $Title.AutoSize = $true
     $Title.width = 25
     $Title.height = 10
@@ -266,7 +266,7 @@ function NewBox {
     $PopupBox.Controlbox = $false
 
     $Title = New-Object system.Windows.Forms.Label
-    $Title.text = 'Welcome to Hennepin County Imaging'
+    $Title.text = 'STDWelcome to Hennepin County Imaging'
     $Title.AutoSize = $true
     $Title.width = 25
     $Title.height = 10
@@ -378,7 +378,7 @@ function Invoke-OSDCloud {
         Invoke-NewBoxHD
     }
 
-    Else {
+    Else{
         Invoke-NewBox4k
     }
 }
