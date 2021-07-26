@@ -368,14 +368,17 @@ function Invoke-OSDCloud {
         Set-DisRes 1600
     }
 
-Write-Host -ForegroundColor Cyan 'Waiting 20 seconds!'
-Start-Sleep -Seconds 20
+Write-Host -ForegroundColor Cyan 'Waiting 5 seconds!'
+Start-Sleep -Seconds 5
 
     Add-Type -AssemblyName System.Windows.Forms
     $Monitors = [System.Windows.Forms.Screen]::AllScreens
     foreach ($Monitor in $Monitors) {
         $Width = $Monitor.bounds.Width
     }
+Write-Host "$Width"
+Write-Host -ForegroundColor Cyan 'Waiting 5 seconds!'
+Start-Sleep -Seconds 5
 
     If ($Width = '3840') {
         Invoke-NewBox4K
