@@ -376,10 +376,10 @@ function Invoke-OSDCloud {
         NewBoxHD
     }
 
-    elseif ($Width = '3840') {
-
-    } { NewBox4k }
-    else { NewBox }
+    Elseif ($Width = '3840') {
+        NewBox4k
+    }
+    Else { NewBox }
 }
 
 #=============================================================================
