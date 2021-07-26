@@ -20,7 +20,7 @@ $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
 #=============================================================================
 #region FUNCTIONS
 #=============================================================================
-function NewBoxHD {
+function Invoke-NewBoxHD {
     <#
     .SYNOPSIS
     Synopsis
@@ -127,7 +127,7 @@ function NewBoxHD {
     }
 }
 
-function NewBox4k {
+function Invoke-NewBox4k {
     <#
     .SYNOPSIS
     Synopsis
@@ -373,10 +373,12 @@ function Invoke-OSDCloud {
     }
 
     If ($Width = '1920') {
-        NewBoxHD
+        Invoke-NewBoxHD
     }
 
-    Else{NewBox4k}
+    Else {
+        Invoke-NewBox4k
+    }
 }
 
 #=============================================================================
