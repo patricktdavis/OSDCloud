@@ -378,11 +378,11 @@ Start-Sleep -Seconds 20
     }
 
     If ($Width = '3840') {
-        Invoke-NewBoxHD
+        Invoke-NewBox4K
     }
 
     Else{
-        Invoke-NewBox4k
+        Invoke-NewBoxHD
     }
 }
 
