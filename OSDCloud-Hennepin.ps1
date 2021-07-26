@@ -368,13 +368,16 @@ function Invoke-OSDCloud {
         Set-DisRes 1600
     }
 
+Write-Host -ForegroundColor Cyan 'Waiting 20 seconds!'
+Start-Sleep -Seconds 20
+
     Add-Type -AssemblyName System.Windows.Forms
     $Monitors = [System.Windows.Forms.Screen]::AllScreens
     foreach ($Monitor in $Monitors) {
         $Width = $Monitor.bounds.Width
     }
 
-    If ($Width = '1920') {
+    If ($Width = '3840') {
         Invoke-NewBoxHD
     }
 
