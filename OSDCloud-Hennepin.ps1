@@ -380,7 +380,7 @@ Write-Host "$Width"
 Write-Host -ForegroundColor Cyan 'Waiting 5 seconds!'
 Start-Sleep -Seconds 5
 
-    If ($Width = '3840') {
+    If ($Width -eq '3840') {
         Invoke-NewBox4K
     }
 
