@@ -29,8 +29,8 @@ public static extern uint GetVersion();
 '@
         Add-Type -MemberDefinition $signature -Name 'Win32OSVersion' -Namespace Win32Functions -PassThru
     }
-    $OS = [System.BitConverter]::GetBytes((Invoke-OSVersion)::GetVersion())
-    $Build = [byte]$os[2],[byte]$os[3]
+    $OSBuild = [System.BitConverter]::GetBytes((Invoke-OSVersion)::GetVersion())
+    $Build = [byte]$OSBuild[2],[byte]$OSBuild[3]
     $BuildNumber = [System.BitConverter]::ToInt16($build,0)
 
     if ($BuildNumber -eq '19042') {
