@@ -1,4 +1,4 @@
-#=============================================================================
+##=============================================================================
 #region SCRIPT DETAILS
 #=============================================================================
 
@@ -16,6 +16,42 @@ PS C:\> OSDCloud-Hennepin.ps1
 
 $OS = 'Windows 10 Enterprise 20H2'
 $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
+If (Test-Path -Path 'C:\Windows\System32\kernel32.dll') {
+    $Edition = (Get-WindowsEdition -Path c:\).edition
+    Function Invoke-OSVersion {
+
+        $signature = @'
+
+[DllImport("kernel32.dll")]
+
+public static extern uint GetVersion();
+
+'@
+        Add-Type -MemberDefinition $signature -Name 'Win32OSVersion' -Namespace Win32Functions -PassThru
+    }
+    $OS = [System.BitConverter]::GetBytes((Invoke-OSVersion)::GetVersion())
+    $Build = [byte]$os[2],[byte]$os[3]
+    $BuildNumber = [System.BitConverter]::ToInt16($build,0)
+
+    if ($BuildNumber -eq '19042') {
+        $InstalledBuild = '20H2'
+    } elseif ($BuildNumber -eq '19041') {
+        $InstalledBuild = '20H2'
+    } elseif ($BuildNumber -eq '18363') {
+        $InstalledBuild = '1909'
+    } elseif ($BuildNumber -eq '18362') {
+        $InstalledBuild = '1903'
+    } elseif ($BuildNumber -eq '17763') {
+        $InstalledBuild = '1809'
+    } elseif ($BuildNumber -eq '17134') {
+        $InstalledBuild = '1803'
+    } elseif ($BuildNumber -eq '16299') {
+        $InstalledBuild = '1709'
+    }
+} else {
+    $InstalledBuild -eq 'No OS'
+    $Edition -eq 'Installed'
+}
 
 #=============================================================================
 #region FUNCTIONS
@@ -44,7 +80,7 @@ function Invoke-NewBoxHD {
     [System.Windows.Forms.Application]::EnableVisualStyles()
 
     $PopupBox = New-Object system.Windows.Forms.Form
-    $PopupBox.ClientSize = New-Object System.Drawing.Point(1300,550)
+    $PopupBox.ClientSize = New-Object System.Drawing.Point(1300,750)
     $PopupBox.text = 'Hennepin County SSD Team'
     #$PopupBox.TopMost = $true
     $PopupBox.Controlbox = $false
@@ -57,12 +93,28 @@ function Invoke-NewBoxHD {
     $Title.location = New-Object System.Drawing.Point(26,34)
     $Title.Font = New-Object System.Drawing.Font('Segoe UI',28,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
+    $InstalledOSDescription = New-Object system.Windows.Forms.Label
+    $InstalledOSDescription.text = 'The following Operating System is installed: '
+    $InstalledOSDescription.AutoSize = $true
+    $InstalledOSDescription.width = 25
+    $InstalledOSDescription.height = 10
+    $InstalledOSDescription.location = New-Object System.Drawing.Point(43,219)
+    $InstalledOSDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
+
+    $InstalledOperatingSystemLabel = New-Object system.Windows.Forms.Label
+    $InstalledOperatingSystemLabel.text = "$InstalledBuild $Edition"
+    $InstalledOperatingSystemLabel.AutoSize = $true
+    $InstalledOperatingSystemLabel.width = 25
+    $InstalledOperatingSystemLabel.height = 10
+    $InstalledOperatingSystemLabel.location = New-Object System.Drawing.Point(41,263)
+    $InstalledOperatingSystemLabel.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
     $OSDescription = New-Object system.Windows.Forms.Label
     $OSDescription.text = 'The following Operating System will be installed: '
     $OSDescription.AutoSize = $true
     $OSDescription.width = 25
     $OSDescription.height = 10
-    $OSDescription.location = New-Object System.Drawing.Point(43,119)
+    $OSDescription.location = New-Object System.Drawing.Point(43,339)
     $OSDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
     $OperatingSystemLabel = New-Object system.Windows.Forms.Label
@@ -70,7 +122,7 @@ function Invoke-NewBoxHD {
     $OperatingSystemLabel.AutoSize = $true
     $OperatingSystemLabel.width = 25
     $OperatingSystemLabel.height = 10
-    $OperatingSystemLabel.location = New-Object System.Drawing.Point(41,163)
+    $OperatingSystemLabel.location = New-Object System.Drawing.Point(41,383)
     $OperatingSystemLabel.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
     $SerialDescription = New-Object system.Windows.Forms.Label
@@ -78,7 +130,7 @@ function Invoke-NewBoxHD {
     $SerialDescription.AutoSize = $true
     $SerialDescription.width = 25
     $SerialDescription.height = 10
-    $SerialDescription.location = New-Object System.Drawing.Point(41,244)
+    $SerialDescription.location = New-Object System.Drawing.Point(41,444)
     $SerialDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
     $SerialLabel = New-Object system.Windows.Forms.Label
@@ -86,7 +138,7 @@ function Invoke-NewBoxHD {
     $SerialLabel.AutoSize = $true
     $SerialLabel.width = 25
     $SerialLabel.height = 10
-    $SerialLabel.location = New-Object System.Drawing.Point(43,289)
+    $SerialLabel.location = New-Object System.Drawing.Point(43,489)
     $SerialLabel.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
     $MakeASelection = New-Object system.Windows.Forms.Label
@@ -94,14 +146,14 @@ function Invoke-NewBoxHD {
     $MakeASelection.AutoSize = $true
     $MakeASelection.width = 25
     $MakeASelection.height = 10
-    $MakeASelection.location = New-Object System.Drawing.Point(39,358)
+    $MakeASelection.location = New-Object System.Drawing.Point(39,558)
     $MakeASelection.Font = New-Object System.Drawing.Font('Segoe UI',20)
 
     $ExitButton = New-Object system.Windows.Forms.Button
     $ExitButton.text = 'Exit'
     $ExitButton.width = 257
     $ExitButton.height = 43
-    $ExitButton.location = New-Object System.Drawing.Point(43,466)
+    $ExitButton.location = New-Object System.Drawing.Point(43,666)
     $ExitButton.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
     $ExitButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
 
@@ -109,11 +161,11 @@ function Invoke-NewBoxHD {
     $InstallWindows.text = 'Install Windows 10'
     $InstallWindows.width = 500
     $InstallWindows.height = 43
-    $InstallWindows.location = New-Object System.Drawing.Point(433,466)
+    $InstallWindows.location = New-Object System.Drawing.Point(433,666)
     $InstallWindows.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold -bor [System.Drawing.FontStyle]::Underline))
     $InstallWindows.DialogResult = [System.Windows.Forms.DialogResult]::OK
 
-    $PopupBox.controls.AddRange(@($InstallWindows,$Title,$OSDescription,$OperatingSystemLabel,$SerialDescription,$SerialLabel,$MakeASelection,$ExitButton))
+    $PopupBox.controls.AddRange(@($InstallWindows,$Title,$InstalledOSDescription,$InstalledOperatingSystemLabel,$OSDescription,$OperatingSystemLabel,$SerialDescription,$SerialLabel,$MakeASelection,$ExitButton))
     $Result = $PopupBox.ShowDialog()
 
     If ($Result -eq [System.Windows.Forms.DialogResult]::OK) {
@@ -166,12 +218,28 @@ function Invoke-NewBox4k {
     $Title.location = New-Object System.Drawing.Point(26,34)
     $Title.Font = New-Object System.Drawing.Font('Segoe UI',28,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
+    $InstalledOSDescription = New-Object system.Windows.Forms.Label
+    $InstalledOSDescription.text = 'The following Operating System is installed: '
+    $InstalledOSDescription.AutoSize = $true
+    $InstalledOSDescription.width = 25
+    $InstalledOSDescription.height = 10
+    $InstalledOSDescription.location = New-Object System.Drawing.Point(43,250)
+    $InstalledOSDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
+
+    $InstalledOperatingSystemLabel = New-Object system.Windows.Forms.Label
+    $InstalledOperatingSystemLabel.text = "$InstalledBuild $Edition"
+    $InstalledOperatingSystemLabel.AutoSize = $true
+    $InstalledOperatingSystemLabel.width = 25
+    $InstalledOperatingSystemLabel.height = 10
+    $InstalledOperatingSystemLabel.location = New-Object System.Drawing.Point(41,350)
+    $InstalledOperatingSystemLabel.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+
     $OSDescription = New-Object system.Windows.Forms.Label
     $OSDescription.text = 'The following Operating System will be installed: '
     $OSDescription.AutoSize = $true
     $OSDescription.width = 25
     $OSDescription.height = 10
-    $OSDescription.location = New-Object System.Drawing.Point(43,300)
+    $OSDescription.location = New-Object System.Drawing.Point(43,550)
     $OSDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
     $OperatingSystemLabel = New-Object system.Windows.Forms.Label
@@ -179,7 +247,7 @@ function Invoke-NewBox4k {
     $OperatingSystemLabel.AutoSize = $true
     $OperatingSystemLabel.width = 25
     $OperatingSystemLabel.height = 10
-    $OperatingSystemLabel.location = New-Object System.Drawing.Point(41,400)
+    $OperatingSystemLabel.location = New-Object System.Drawing.Point(41,650)
     $OperatingSystemLabel.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
     $SerialDescription = New-Object system.Windows.Forms.Label
@@ -187,7 +255,7 @@ function Invoke-NewBox4k {
     $SerialDescription.AutoSize = $true
     $SerialDescription.width = 25
     $SerialDescription.height = 10
-    $SerialDescription.location = New-Object System.Drawing.Point(41,600)
+    $SerialDescription.location = New-Object System.Drawing.Point(41,850)
     $SerialDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
     $SerialLabel = New-Object system.Windows.Forms.Label
@@ -195,7 +263,7 @@ function Invoke-NewBox4k {
     $SerialLabel.AutoSize = $true
     $SerialLabel.width = 25
     $SerialLabel.height = 10
-    $SerialLabel.location = New-Object System.Drawing.Point(43,800)
+    $SerialLabel.location = New-Object System.Drawing.Point(43,950)
     $SerialLabel.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
     $MakeASelection = New-Object system.Windows.Forms.Label
@@ -203,14 +271,14 @@ function Invoke-NewBox4k {
     $MakeASelection.AutoSize = $true
     $MakeASelection.width = 25
     $MakeASelection.height = 10
-    $MakeASelection.location = New-Object System.Drawing.Point(39,1000)
+    $MakeASelection.location = New-Object System.Drawing.Point(39,1100)
     $MakeASelection.Font = New-Object System.Drawing.Font('Segoe UI',20)
 
     $ExitButton = New-Object system.Windows.Forms.Button
     $ExitButton.text = 'Exit'
     $ExitButton.width = 257
     $ExitButton.height = 100
-    $ExitButton.location = New-Object System.Drawing.Point(43,1200)
+    $ExitButton.location = New-Object System.Drawing.Point(43,1300)
     $ExitButton.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
     $ExitButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
 
@@ -218,11 +286,11 @@ function Invoke-NewBox4k {
     $InstallWindows.text = 'Install Windows 10'
     $InstallWindows.width = 1000
     $InstallWindows.height = 100
-    $InstallWindows.location = New-Object System.Drawing.Point(433,1200)
+    $InstallWindows.location = New-Object System.Drawing.Point(433,1300)
     $InstallWindows.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold -bor [System.Drawing.FontStyle]::Underline))
     $InstallWindows.DialogResult = [System.Windows.Forms.DialogResult]::OK
 
-    $PopupBox.controls.AddRange(@($InstallWindows,$Title,$OSDescription,$OperatingSystemLabel,$SerialDescription,$SerialLabel,$MakeASelection,$ExitButton))
+    $PopupBox.controls.AddRange(@($InstallWindows,$Title,$InstalledOSDescription,$InstalledOperatingSystemLabel,$OSDescription,$OperatingSystemLabel,$SerialDescription,$SerialLabel,$MakeASelection,$ExitButton))
     $Result = $PopupBox.ShowDialog()
 
     If ($Result -eq [System.Windows.Forms.DialogResult]::OK) {
