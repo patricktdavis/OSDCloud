@@ -16,7 +16,12 @@ PS C:\> OSDCloud-Hennepin.ps1
 
 $OS = 'Windows 10 Enterprise 20H2'
 $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
-$Run = '-OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI'
+$Run = @{
+    OSLanguage = en-us
+    OSBuild    = 20H2
+    OSEdition  = Enterprise
+    ZTI        = $true
+}
 
 #=============================================================================
 #region FUNCTIONS
@@ -124,7 +129,7 @@ function Invoke-NewBoxHD {
 
         Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
         Import-Module OSD -Force
-        Start-OSDCloud $Run
+        Start-OSDCloud @Run
 
     }
 }
@@ -233,7 +238,7 @@ function Invoke-NewBox4k {
 
         Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
         Import-Module OSD -Force
-        Start-OSDCloud $Run
+        Start-OSDCloud @Run
 
     }
 }
@@ -273,7 +278,7 @@ function Invoke-OSDCloud {
         Invoke-NewBox4K
     }
 
-    Else{
+    Else {
         Invoke-NewBoxHD
     }
 }
@@ -288,7 +293,7 @@ Invoke-OSDCloud
 #Restart from WinPE
 Write-Host -ForegroundColor Cyan 'Restarting in 20 seconds!'
 Start-Sleep -Seconds 20
-wpeutil reboot
+#wpeutil reboot
 
 #=============================================================================
 #endregion
