@@ -16,6 +16,7 @@ PS C:\> OSDCloud-Hennepin.ps1
 
 $OS = 'Windows 10 Enterprise 20H2'
 $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
+$Run = 'Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI'
 
 #=============================================================================
 #region FUNCTIONS
@@ -46,7 +47,7 @@ function Invoke-NewBoxHD {
     $PopupBox = New-Object system.Windows.Forms.Form
     $PopupBox.ClientSize = New-Object System.Drawing.Point(1300,550)
     $PopupBox.text = 'Hennepin County SSD Team'
-    $PopupBox.TopMost = $true
+    #$PopupBox.TopMost = $true
     $PopupBox.Controlbox = $false
 
     $Title = New-Object system.Windows.Forms.Label
@@ -123,7 +124,7 @@ function Invoke-NewBoxHD {
 
         Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
         Import-Module OSD -Force
-        Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
+        $Run
 
     }
 }
@@ -155,7 +156,7 @@ function Invoke-NewBox4k {
     $PopupBox = New-Object system.Windows.Forms.Form
     $PopupBox.ClientSize = New-Object System.Drawing.Point(2400,1450)
     $PopupBox.text = 'Hennepin County SSD Team'
-    $PopupBox.TopMost = $true
+    #$PopupBox.TopMost = $true
     $PopupBox.Controlbox = $false
 
     $Title = New-Object system.Windows.Forms.Label
@@ -232,7 +233,7 @@ function Invoke-NewBox4k {
 
         Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
         Import-Module OSD -Force
-        Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
+        $Run
 
     }
 }
