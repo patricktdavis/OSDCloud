@@ -49,8 +49,8 @@ public static extern uint GetVersion();
         $InstalledBuild = '1709'
     }
 } else {
-    $InstalledBuild = 'No OS'
-    $Edition = 'Installed'
+    $InstalledBuild = 'Installed'
+    $Edition = 'No OS'
 }
 
 #=============================================================================
