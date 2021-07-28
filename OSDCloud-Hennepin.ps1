@@ -102,9 +102,9 @@ function Invoke-NewBoxHD {
     $InstalledOSDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
     $InstalledOperatingSystemLabel = New-Object system.Windows.Forms.Label
-    $InstalledOperatingSystemLabel.text = "$InstalledBuild $Edition"
+    $InstalledOperatingSystemLabel.text = "Windows 10 $Edition $InstalledBuild"
     $InstalledOperatingSystemLabel.AutoSize = $true
-    $InstalledOperatingSystemLabel.width = 25
+    $InstalledOperatingSystemLabel.width = 40
     $InstalledOperatingSystemLabel.height = 10
     $InstalledOperatingSystemLabel.location = New-Object System.Drawing.Point(41,263)
     $InstalledOperatingSystemLabel.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
