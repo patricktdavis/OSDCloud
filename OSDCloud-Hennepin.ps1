@@ -14,7 +14,7 @@ PS C:\> OSDCloud-Hennepin.ps1
 #endregion
 #=============================================================================
 
-$OS = 'Windows 10 Enterprise 20H2'
+$OS = 'Windows 10 20H2 Enterprise'
 $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
 $Windows = 'Windows 10'
 If (Test-Path -Path 'C:\Windows\System32\kernel32.dll') {
