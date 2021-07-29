@@ -16,6 +16,7 @@ PS C:\> OSDCloud-Hennepin.ps1
 
 $OS = 'Windows 10 Enterprise 20H2'
 $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
+$Windows = 'Windows 10'
 If (Test-Path -Path 'C:\Windows\System32\kernel32.dll') {
     $Edition = (Get-WindowsEdition -Path c:\).edition
     Function Invoke-OSVersion {
@@ -51,6 +52,7 @@ public static extern uint GetVersion();
 } else {
     $InstalledBuild = 'Installed'
     $Edition = 'No OS'
+    $Windows = ''
 }
 
 #=============================================================================
@@ -102,7 +104,7 @@ function Invoke-NewBoxHD {
     $InstalledOSDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
     $InstalledOperatingSystemLabel = New-Object system.Windows.Forms.Label
-    $InstalledOperatingSystemLabel.text = "Windows 10 $Edition $InstalledBuild"
+    $InstalledOperatingSystemLabel.text = "$Windows $Edition $InstalledBuild"
     $InstalledOperatingSystemLabel.AutoSize = $true
     $InstalledOperatingSystemLabel.width = 40
     $InstalledOperatingSystemLabel.height = 10
@@ -227,7 +229,7 @@ function Invoke-NewBox4k {
     $InstalledOSDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
     $InstalledOperatingSystemLabel = New-Object system.Windows.Forms.Label
-    $InstalledOperatingSystemLabel.text = "$InstalledBuild $Edition"
+    $InstalledOperatingSystemLabel.text = "$Windows $InstalledBuild $Edition"
     $InstalledOperatingSystemLabel.AutoSize = $true
     $InstalledOperatingSystemLabel.width = 25
     $InstalledOperatingSystemLabel.height = 10
