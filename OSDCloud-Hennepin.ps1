@@ -134,12 +134,10 @@ function Invoke-NewBoxHD {
         Import-Module OSD -Force
 
         if ($Selection -eq 'Windows 10 v20H2') {
-            Write-Host '20h2'
             Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
         }
 
         if ($Selection -eq 'Windows 10 v1909') {
-            Write-Host '1909'
             Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI
         }
     }
@@ -261,12 +259,10 @@ function Invoke-NewBox4k {
         Import-Module OSD -Force
 
         if ($Selection -eq 'Windows 10 v20H2') {
-            Write-Host '20h2'
             Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
         }
 
         if ($Selection -eq 'Windows 10 v1909') {
-            Write-Host '1909'
             Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI
         }
     }
