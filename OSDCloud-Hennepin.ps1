@@ -5,7 +5,6 @@
 <#
 .SYNOPSIS
 Runs a menu on OSDCloud allowing techs to deploy a machine with Chosen Enterprise image
-
 .EXAMPLE
 PS C:\> OSDCloud-Hennepin.ps1
 #>
@@ -14,19 +13,16 @@ PS C:\> OSDCloud-Hennepin.ps1
 #endregion
 #=============================================================================
 
-$OS = 'Windows 10 20H2 Enterprise'
+$OS = 'Windows 10 Enterprise 20H2'
 $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
-$Windows = 'Windows 10'
+<#$Windows = 'Windows 10'
 If (Test-Path -Path 'C:\Windows\System32\kernel32.dll') {
     $Edition = (Get-WindowsEdition -Path c:\).edition
     Function Invoke-OSVersion {
 
         $signature = @'
-
 [DllImport("kernel32.dll")]
-
 public static extern uint GetVersion();
-
 '@
         Add-Type -MemberDefinition $signature -Name 'Win32OSVersion' -Namespace Win32Functions -PassThru
     }
@@ -53,7 +49,7 @@ public static extern uint GetVersion();
     $InstalledBuild = 'Installed'
     $Edition = 'No OS'
     $Windows = ''
-}
+}#>
 
 #=============================================================================
 #region FUNCTIONS
@@ -62,14 +58,11 @@ function Invoke-NewBoxHD {
     <#
     .SYNOPSIS
     Synopsis
-
     .EXAMPLE
     NewBox
-
     .INPUTS
     None
     You cannot pipe objects to NewBox.
-
     .OUTPUTS
     None
     The cmdlet does not return any output.
@@ -84,7 +77,7 @@ function Invoke-NewBoxHD {
     $PopupBox = New-Object system.Windows.Forms.Form
     $PopupBox.ClientSize = New-Object System.Drawing.Point(1300,750)
     $PopupBox.text = 'Hennepin County SSD Team'
-    #$PopupBox.TopMost = $true
+    $PopupBox.TopMost = $false
     $PopupBox.Controlbox = $false
 
     $Title = New-Object system.Windows.Forms.Label
@@ -95,28 +88,12 @@ function Invoke-NewBoxHD {
     $Title.location = New-Object System.Drawing.Point(26,34)
     $Title.Font = New-Object System.Drawing.Font('Segoe UI',28,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
-    $InstalledOSDescription = New-Object system.Windows.Forms.Label
-    $InstalledOSDescription.text = 'The following Operating System is installed: '
-    $InstalledOSDescription.AutoSize = $true
-    $InstalledOSDescription.width = 25
-    $InstalledOSDescription.height = 10
-    $InstalledOSDescription.location = New-Object System.Drawing.Point(43,219)
-    $InstalledOSDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
-
-    $InstalledOperatingSystemLabel = New-Object system.Windows.Forms.Label
-    $InstalledOperatingSystemLabel.text = "$Windows $Edition $InstalledBuild"
-    $InstalledOperatingSystemLabel.AutoSize = $true
-    $InstalledOperatingSystemLabel.width = 40
-    $InstalledOperatingSystemLabel.height = 10
-    $InstalledOperatingSystemLabel.location = New-Object System.Drawing.Point(41,263)
-    $InstalledOperatingSystemLabel.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
-
     $OSDescription = New-Object system.Windows.Forms.Label
-    $OSDescription.text = 'The following Operating System will be installed: '
+    $OSDescription.text = 'The default Operating System that will be installed is: '
     $OSDescription.AutoSize = $true
     $OSDescription.width = 25
     $OSDescription.height = 10
-    $OSDescription.location = New-Object System.Drawing.Point(43,339)
+    $OSDescription.location = New-Object System.Drawing.Point(43,139)
     $OSDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
     $OperatingSystemLabel = New-Object system.Windows.Forms.Label
@@ -124,7 +101,7 @@ function Invoke-NewBoxHD {
     $OperatingSystemLabel.AutoSize = $true
     $OperatingSystemLabel.width = 25
     $OperatingSystemLabel.height = 10
-    $OperatingSystemLabel.location = New-Object System.Drawing.Point(41,383)
+    $OperatingSystemLabel.location = New-Object System.Drawing.Point(41,183)
     $OperatingSystemLabel.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
     $SerialDescription = New-Object system.Windows.Forms.Label
@@ -132,7 +109,7 @@ function Invoke-NewBoxHD {
     $SerialDescription.AutoSize = $true
     $SerialDescription.width = 25
     $SerialDescription.height = 10
-    $SerialDescription.location = New-Object System.Drawing.Point(41,444)
+    $SerialDescription.location = New-Object System.Drawing.Point(41,260)
     $SerialDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
     $SerialLabel = New-Object system.Windows.Forms.Label
@@ -140,7 +117,7 @@ function Invoke-NewBoxHD {
     $SerialLabel.AutoSize = $true
     $SerialLabel.width = 25
     $SerialLabel.height = 10
-    $SerialLabel.location = New-Object System.Drawing.Point(43,489)
+    $SerialLabel.location = New-Object System.Drawing.Point(43,300)
     $SerialLabel.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
     $MakeASelection = New-Object system.Windows.Forms.Label
@@ -148,8 +125,20 @@ function Invoke-NewBoxHD {
     $MakeASelection.AutoSize = $true
     $MakeASelection.width = 25
     $MakeASelection.height = 10
-    $MakeASelection.location = New-Object System.Drawing.Point(39,558)
+    $MakeASelection.location = New-Object System.Drawing.Point(39,388)
     $MakeASelection.Font = New-Object System.Drawing.Font('Segoe UI',20)
+
+    $OSSelection = New-Object system.Windows.Forms.ListBox
+    $OSSelection.text = 'ListBox'
+    $OSSelection.width = 400
+    $OSSelection.height = 200
+    $OSSelection.location = New-Object System.Drawing.Point(30,444)
+    $OSSelection.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
+
+    [void] $OSSelection.Items.Add('Windows 10 v20H2')
+    [void] $OSSelection.Items.Add('Windows 10 v1909')
+    $OSSelection.SetSelected(0,$true)  > $Null
+    $PopupBox.Controls.Add($OSSelection)
 
     $ExitButton = New-Object system.Windows.Forms.Button
     $ExitButton.text = 'Exit'
@@ -167,18 +156,27 @@ function Invoke-NewBoxHD {
     $InstallWindows.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold -bor [System.Drawing.FontStyle]::Underline))
     $InstallWindows.DialogResult = [System.Windows.Forms.DialogResult]::OK
 
-    $PopupBox.controls.AddRange(@($InstallWindows,$Title,$InstalledOSDescription,$InstalledOperatingSystemLabel,$OSDescription,$OperatingSystemLabel,$SerialDescription,$SerialLabel,$MakeASelection,$ExitButton))
+    $PopupBox.controls.AddRange(@($InstallWindows,$Title,$OSDescription,$OperatingSystemLabel,$SerialDescription,$SerialLabel,$OSSelection,$MakeASelection,$ExitButton))
     $Result = $PopupBox.ShowDialog()
 
     If ($Result -eq [System.Windows.Forms.DialogResult]::OK) {
+        $Selection = $OSSelection.SelectedItem
         #Installing latest OSD Content
         Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
         Install-Module OSD -Force
 
         Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
         Import-Module OSD -Force
-        Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
 
+        if ($Selection -eq 'Windows 10 v20H2') {
+            Write-Host '20h2'
+            Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
+        }
+
+        if ($Selection -eq 'Windows 10 v1909') {
+            Write-Host '1909'
+            Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI
+        }
     }
 }
 
@@ -186,14 +184,11 @@ function Invoke-NewBox4k {
     <#
     .SYNOPSIS
     Synopsis
-
     .EXAMPLE
     NewBox
-
     .INPUTS
     None
     You cannot pipe objects to NewBox.
-
     .OUTPUTS
     None
     The cmdlet does not return any output.
@@ -209,7 +204,7 @@ function Invoke-NewBox4k {
     $PopupBox = New-Object system.Windows.Forms.Form
     $PopupBox.ClientSize = New-Object System.Drawing.Point(2400,1450)
     $PopupBox.text = 'Hennepin County SSD Team'
-    #$PopupBox.TopMost = $true
+    $PopupBox.TopMost = $false
     $PopupBox.Controlbox = $false
 
     $Title = New-Object system.Windows.Forms.Label
@@ -220,28 +215,12 @@ function Invoke-NewBox4k {
     $Title.location = New-Object System.Drawing.Point(26,34)
     $Title.Font = New-Object System.Drawing.Font('Segoe UI',28,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
-    $InstalledOSDescription = New-Object system.Windows.Forms.Label
-    $InstalledOSDescription.text = 'The following Operating System is installed: '
-    $InstalledOSDescription.AutoSize = $true
-    $InstalledOSDescription.width = 25
-    $InstalledOSDescription.height = 10
-    $InstalledOSDescription.location = New-Object System.Drawing.Point(43,250)
-    $InstalledOSDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
-
-    $InstalledOperatingSystemLabel = New-Object system.Windows.Forms.Label
-    $InstalledOperatingSystemLabel.text = "$Windows $InstalledBuild $Edition"
-    $InstalledOperatingSystemLabel.AutoSize = $true
-    $InstalledOperatingSystemLabel.width = 25
-    $InstalledOperatingSystemLabel.height = 10
-    $InstalledOperatingSystemLabel.location = New-Object System.Drawing.Point(41,350)
-    $InstalledOperatingSystemLabel.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
-
     $OSDescription = New-Object system.Windows.Forms.Label
-    $OSDescription.text = 'The following Operating System will be installed: '
+    $OSDescription.text = 'The default Operating System that will be installed is: '
     $OSDescription.AutoSize = $true
     $OSDescription.width = 25
     $OSDescription.height = 10
-    $OSDescription.location = New-Object System.Drawing.Point(43,550)
+    $OSDescription.location = New-Object System.Drawing.Point(43,250)
     $OSDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
     $OperatingSystemLabel = New-Object system.Windows.Forms.Label
@@ -249,7 +228,7 @@ function Invoke-NewBox4k {
     $OperatingSystemLabel.AutoSize = $true
     $OperatingSystemLabel.width = 25
     $OperatingSystemLabel.height = 10
-    $OperatingSystemLabel.location = New-Object System.Drawing.Point(41,650)
+    $OperatingSystemLabel.location = New-Object System.Drawing.Point(41,350)
     $OperatingSystemLabel.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
     $SerialDescription = New-Object system.Windows.Forms.Label
@@ -257,15 +236,15 @@ function Invoke-NewBox4k {
     $SerialDescription.AutoSize = $true
     $SerialDescription.width = 25
     $SerialDescription.height = 10
-    $SerialDescription.location = New-Object System.Drawing.Point(41,850)
+    $SerialDescription.location = New-Object System.Drawing.Point(41,500)
     $SerialDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
     $SerialLabel = New-Object system.Windows.Forms.Label
-    $SerialLabel.text = "$Serial"
+    $SerialLabel.text = 'Serial'
     $SerialLabel.AutoSize = $true
     $SerialLabel.width = 25
     $SerialLabel.height = 10
-    $SerialLabel.location = New-Object System.Drawing.Point(43,950)
+    $SerialLabel.location = New-Object System.Drawing.Point(43,600)
     $SerialLabel.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
     $MakeASelection = New-Object system.Windows.Forms.Label
@@ -273,8 +252,20 @@ function Invoke-NewBox4k {
     $MakeASelection.AutoSize = $true
     $MakeASelection.width = 25
     $MakeASelection.height = 10
-    $MakeASelection.location = New-Object System.Drawing.Point(39,1100)
+    $MakeASelection.location = New-Object System.Drawing.Point(39,830)
     $MakeASelection.Font = New-Object System.Drawing.Font('Segoe UI',20)
+
+    $OSSelection = New-Object system.Windows.Forms.ListBox
+    $OSSelection.text = 'ListBox'
+    $OSSelection.width = 1000
+    $OSSelection.height = 400
+    $OSSelection.location = New-Object System.Drawing.Point(30,950)
+    $OSSelection.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
+
+    [void] $OSSelection.Items.Add('Windows 10 v20H2')
+    [void] $OSSelection.Items.Add('Windows 10 v1909')
+    $OSSelection.SetSelected(0,$true)  > $Null
+    $PopupBox.Controls.Add($OSSelection)
 
     $ExitButton = New-Object system.Windows.Forms.Button
     $ExitButton.text = 'Exit'
@@ -292,18 +283,27 @@ function Invoke-NewBox4k {
     $InstallWindows.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold -bor [System.Drawing.FontStyle]::Underline))
     $InstallWindows.DialogResult = [System.Windows.Forms.DialogResult]::OK
 
-    $PopupBox.controls.AddRange(@($InstallWindows,$Title,$InstalledOSDescription,$InstalledOperatingSystemLabel,$OSDescription,$OperatingSystemLabel,$SerialDescription,$SerialLabel,$MakeASelection,$ExitButton))
+    $PopupBox.controls.AddRange(@($InstallWindows,$Title,$OSDescription,$OperatingSystemLabel,$SerialDescription,$SerialLabel,$MakeASelection,$OSSelection,$ExitButton))
     $Result = $PopupBox.ShowDialog()
 
     If ($Result -eq [System.Windows.Forms.DialogResult]::OK) {
+        $Selection = $OSSelection.SelectedItem
         #Installing latest OSD Content
         Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
         Install-Module OSD -Force
 
         Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
         Import-Module OSD -Force
-        Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
 
+        if ($Selection -eq 'Windows 10 v20H2') {
+            Write-Host '20h2'
+            Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
+        }
+
+        if ($Selection -eq 'Windows 10 v1909') {
+            Write-Host '1909'
+            Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI
+        }
     }
 }
 
@@ -311,14 +311,11 @@ function Invoke-OSDCloud {
     <#
     .SYNOPSIS
     Synopsis
-
     .EXAMPLE
     Invoke-OSDCloud
-
     .INPUTS
     None
     You cannot pipe objects to Invoke-OSDCloud.
-
     .OUTPUTS
     None
     The cmdlet does not return any output.
