@@ -15,41 +15,6 @@ PS C:\> OSDCloud-Hennepin.ps1
 
 $OS = 'Windows 10 Enterprise 20H2'
 $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
-<#$Windows = 'Windows 10'
-If (Test-Path -Path 'C:\Windows\System32\kernel32.dll') {
-    $Edition = (Get-WindowsEdition -Path c:\).edition
-    Function Invoke-OSVersion {
-
-        $signature = @'
-[DllImport("kernel32.dll")]
-public static extern uint GetVersion();
-'@
-        Add-Type -MemberDefinition $signature -Name 'Win32OSVersion' -Namespace Win32Functions -PassThru
-    }
-    $OSBuild = [System.BitConverter]::GetBytes((Invoke-OSVersion)::GetVersion())
-    $Build = [byte]$OSBuild[2],[byte]$OSBuild[3]
-    $BuildNumber = [System.BitConverter]::ToInt16($build,0)
-
-    if ($BuildNumber -eq '19042') {
-        $InstalledBuild = '20H2'
-    } elseif ($BuildNumber -eq '19041') {
-        $InstalledBuild = '20H2'
-    } elseif ($BuildNumber -eq '18363') {
-        $InstalledBuild = '1909'
-    } elseif ($BuildNumber -eq '18362') {
-        $InstalledBuild = '1903'
-    } elseif ($BuildNumber -eq '17763') {
-        $InstalledBuild = '1809'
-    } elseif ($BuildNumber -eq '17134') {
-        $InstalledBuild = '1803'
-    } elseif ($BuildNumber -eq '16299') {
-        $InstalledBuild = '1709'
-    }
-} else {
-    $InstalledBuild = 'Installed'
-    $Edition = 'No OS'
-    $Windows = ''
-}#>
 
 #=============================================================================
 #region FUNCTIONS
