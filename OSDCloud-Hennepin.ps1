@@ -240,7 +240,7 @@ function Invoke-NewBox4k {
     $SerialDescription.Font = New-Object System.Drawing.Font('Segoe UI',14,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
     $SerialLabel = New-Object system.Windows.Forms.Label
-    $SerialLabel.text = 'Serial'
+    $SerialLabel.text = "$Serial"
     $SerialLabel.AutoSize = $true
     $SerialLabel.width = 25
     $SerialLabel.height = 10
