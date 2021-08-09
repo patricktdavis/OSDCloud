@@ -134,10 +134,12 @@ function Invoke-NewBoxHD {
         Import-Module OSD -Force
 
         if ($Selection -eq 'Windows 10 v20H2') {
+            Write-Host '20h2'
             Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
         }
 
         if ($Selection -eq 'Windows 10 v1909') {
+            Write-Host '1909'
             Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI
         }
     }
@@ -259,10 +261,12 @@ function Invoke-NewBox4k {
         Import-Module OSD -Force
 
         if ($Selection -eq 'Windows 10 v20H2') {
+            Write-Host '20h2'
             Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
         }
 
         if ($Selection -eq 'Windows 10 v1909') {
+            Write-Host '1909'
             Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI
         }
     }
@@ -288,6 +292,11 @@ function Invoke-OSDCloud {
     if ((Get-MyComputerModel) -match 'Virtual') {
         Write-Host -ForegroundColor Cyan 'Setting Display Resolution to 1600x'
         Set-DisRes 1600
+    }
+
+    if ((Get-MyComputerModel) -match 'TWR') {
+        Write-Host -ForegroundColor Cyan 'Setting Display Resolution to 1080p'
+        Set-DisRes 1080p
     }
 
     Add-Type -AssemblyName System.Windows.Forms
