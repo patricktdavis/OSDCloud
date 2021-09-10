@@ -128,19 +128,19 @@ function Invoke-NewBoxHD {
         $Selection = $OSSelection.SelectedItem
         #Installing latest OSD Content
         Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
-        Install-Module OSD -Force
+        Install-Module OSD -Force -Verbose
 
         Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
-        Import-Module OSD -Force
+        Import-Module OSD -Force -Verbose
 
         if ($Selection -eq 'Windows 10 v20H2') {
             Write-Host '20h2'
-            Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
+            Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI -verbose
         }
 
         if ($Selection -eq 'Windows 10 v1909') {
             Write-Host '1909'
-            Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI
+            Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI -verbose
         }
     }
 }
@@ -263,13 +263,11 @@ function Invoke-NewBox4k {
         if ($Selection -eq 'Windows 10 v20H2') {
             Write-Host '20h2'
             Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI -Verbose
-            Read-Host -Prompt "Press Enter to exit"
         }
 
         if ($Selection -eq 'Windows 10 v1909') {
             Write-Host '1909'
             Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI -Verbose
-            Read-Host -Prompt "Press Enter to exit"
         }
     }
 }
