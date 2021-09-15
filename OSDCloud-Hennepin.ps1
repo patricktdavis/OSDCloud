@@ -128,7 +128,7 @@ function Invoke-NewBoxHD {
         $Selection = $OSSelection.SelectedItem
         #Installing latest OSD Content
         Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
-        Install-Module OSD -Force -Verbose -RequiredVersion 21.8.11.4
+        Install-Module OSD -Force -Verbose
 
         Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
         Import-Module OSD -Force -Verbose
@@ -255,7 +255,7 @@ function Invoke-NewBox4k {
         $Selection = $OSSelection.SelectedItem
         #Installing latest OSD Content
         Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
-        Install-Module OSD -Force -Verbose -RequiredVersion 21.8.11.4
+        Install-Module OSD -Force -Verbose
 
         Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
         Import-Module OSD -Force -Verbose
