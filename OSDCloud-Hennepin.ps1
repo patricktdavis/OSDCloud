@@ -128,19 +128,17 @@ function Invoke-NewBoxHD {
         $Selection = $OSSelection.SelectedItem
         #Installing latest OSD Content
         Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
-        Install-Module OSD -Force -Verbose
+        Install-Module OSD -Force
 
         Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
-        Import-Module OSD -Force -Verbose
+        Import-Module OSD -Force
 
         if ($Selection -eq 'Windows 10 v20H2') {
-            Write-Host '20h2'
-            Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI -verbose
+            $WIN10
         }
 
         if ($Selection -eq 'Windows 10 v1909') {
-            Write-Host '1909'
-            Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI -verbose
+            $WIN10ALT
         }
     }
 }
@@ -255,19 +253,17 @@ function Invoke-NewBox4k {
         $Selection = $OSSelection.SelectedItem
         #Installing latest OSD Content
         Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
-        Install-Module OSD -Force -Verbose
+        Install-Module OSD -Force
 
         Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
-        Import-Module OSD -Force -Verbose
+        Import-Module OSD -Force
 
         if ($Selection -eq 'Windows 10 v20H2') {
-            Write-Host '20h2'
-            Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI -Verbose
+            $WIN10
         }
 
         if ($Selection -eq 'Windows 10 v1909') {
-            Write-Host '1909'
-            Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI -Verbose
+            $WIN10ALT
         }
     }
 }
@@ -321,6 +317,11 @@ function Invoke-OSDCloud {
 #=============================================================================
 
 Invoke-OSDCloud
+if ($WIN10) {
+    Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
+} elseif ($WIN10ALT) {
+    Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI
+}
 #Restart from WinPE
 Write-Host -ForegroundColor Cyan 'Restarting in 20 seconds!'
 Start-Sleep -Seconds 20
