@@ -128,7 +128,7 @@ function Invoke-NewBoxHD {
         $Selection = $OSSelection.SelectedItem
         #Installing latest OSD Content
         Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
-        Install-Module OSD -Force
+        #Install-Module OSD -Force
 
         Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
         Import-Module OSD -Force
@@ -253,7 +253,7 @@ function Invoke-NewBox4k {
         $Selection = $OSSelection.SelectedItem
         #Installing latest OSD Content
         Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
-        Install-Module OSD -Force
+        #Install-Module OSD -Force
 
         Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
         Import-Module OSD -Force
@@ -318,8 +318,10 @@ function Invoke-OSDCloud {
 
 Invoke-OSDCloud
 if ($WIN10) {
+    Write-Host -ForegroundColor Cyan 'v20H2'
     Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
 } elseif ($WIN10ALT) {
+    Write-Host -ForegroundColor Cyan 'v1909'
     Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI
 }
 #Restart from WinPE
