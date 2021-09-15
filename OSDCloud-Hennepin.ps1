@@ -134,11 +134,11 @@ function Invoke-NewBoxHD {
         Import-Module OSD -Force
 
         if ($Selection -eq 'Windows 10 v20H2') {
-            Write-Output -InputObject $WIN10 = $true
+            Write-Output $WIN10 = $true
         }
 
         if ($Selection -eq 'Windows 10 v1909') {
-            Write-Output -InputObject $WIN10ALT = $true
+            Write-Output $WIN10ALT = $true
         }
     }
 }
@@ -253,11 +253,11 @@ function Invoke-NewBox4k {
         $Selection = $OSSelection.SelectedItem
 
         if ($Selection -eq 'Windows 10 v20H2') {
-            Write-Output -InputObject $WIN10 = $true
+            Write-Output $WIN10 = $true
         }
 
         if ($Selection -eq 'Windows 10 v1909') {
-            Write-Output -InputObject $WIN10ALT = $true
+            Write-Output $WIN10ALT = $true
         }
     }
 }
@@ -314,19 +314,19 @@ Invoke-OSDCloud
 if ($WIN10 = $true) {
     #Installing latest OSD Content
     Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
-    #Install-Module OSD -Force
+    Install-Module OSD -Force -AllowClobber -Verbose
 
     Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
-    Import-Module OSD -Force
+    Import-Module OSD -Force -Verbose
     Write-Host -ForegroundColor Cyan 'v20H2'
     Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
 } elseif ($WIN10ALT = $true) {
     #Installing latest OSD Content
     Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
-    #Install-Module OSD -Force
+    Install-Module OSD -Force -AllowClobber -Verbose
 
     Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
-    Import-Module OSD -Force
+    Import-Module OSD -Force -Verbose
     Write-Host -ForegroundColor Cyan 'v1909'
     Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI
 }
