@@ -128,13 +128,11 @@ function Invoke-NewBoxHD {
         $Selection = $OSSelection.SelectedItem
 
         if ($Selection -eq 'Windows 10 v20H2') {
-            $WIN10 = 'v20H2'
-            return $WIN10
+            return $WIN10 = 'v20H2'
         }
 
         if ($Selection -eq 'HCSO Windows 10 v1909') {
-            $WIN10 = 'v1909'
-            return $WIN10
+            return $WIN10 = 'v1909'
         }
     }
 }
@@ -249,13 +247,11 @@ function Invoke-NewBox4k {
         $Selection = $OSSelection.SelectedItem
 
         if ($Selection -eq 'Windows 10 v20H2') {
-            $WIN10 = 'v20H2'
-            return $WIN10
+            return $WIN10 = 'v20H2'
         }
 
         if ($Selection -eq 'HCSO Windows 10 v1909') {
-            $WIN10 = 'v1909'
-            return $WIN10
+            return $WIN10 = 'v1909'
         }
     }
 }
