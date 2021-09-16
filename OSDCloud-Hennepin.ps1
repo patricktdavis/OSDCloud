@@ -133,8 +133,8 @@ function Invoke-NewBoxHD {
         }
 
         if ($Selection -eq 'HCSO Windows 10 v1909') {
-            $WIN10
-            return $WIN10 = 'v1909'
+            $WIN10 = 'v1909'
+            return $WIN10
         }
     }
 }
@@ -254,7 +254,6 @@ function Invoke-NewBox4k {
         }
 
         if ($Selection -eq 'HCSO Windows 10 v1909') {
-            #Write-Output $WIN10 = 'v1909'
             $WIN10 = 'v1909'
             return $WIN10
         }
