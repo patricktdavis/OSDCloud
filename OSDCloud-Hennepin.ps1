@@ -305,7 +305,7 @@ function Invoke-OSDCloud {
 #=============================================================================
 
 Invoke-OSDCloud
-if ($WIN10 = 'v20H2') {
+if ($WIN10 -eq 'v20H2') {
     #Installing latest OSD Content
     #Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
     #Install-Module OSD -Force -AllowClobber -Verbose
@@ -316,7 +316,7 @@ if ($WIN10 = 'v20H2') {
     #Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI'
     Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}" -Wait
-} elseif ($WIN10 = 'v1909') {
+} elseif ($WIN10 -eq 'v1909') {
     #Installing latest OSD Content
     #Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
     #Install-Module OSD -Force -AllowClobber -Verbose
