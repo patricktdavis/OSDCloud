@@ -128,11 +128,13 @@ function Invoke-NewBoxHD {
         $Selection = $OSSelection.SelectedItem
 
         if ($Selection -eq 'Windows 10 v20H2') {
-            return "$WIN10 = 'v20H2'"
+            $global:WIN10 = 'v20H2'
+            $global:WIN10ALT = $Null
         }
 
         if ($Selection -eq 'HCSO Windows 10 v1909') {
-            return "$WIN10 = 'v1909'"
+            $global:WIN10ALT = 'v1909'
+            $global:WIN10 = $Null
         }
     }
 }
@@ -247,11 +249,13 @@ function Invoke-NewBox4k {
         $Selection = $OSSelection.SelectedItem
 
         if ($Selection -eq 'Windows 10 v20H2') {
-            return "$WIN10 = 'v20H2'"
+            $global:WIN10 = 'v20H2'
+            $global:WIN10ALT = $Null
         }
 
         if ($Selection -eq 'HCSO Windows 10 v1909') {
-            return "$WIN10 = 'v1909'"
+            $global:WIN10ALT = 'v1909'
+            $global:WIN10 = $Null
         }
     }
 }
@@ -305,11 +309,11 @@ function Invoke-OSDCloud {
 #=============================================================================
 
 Invoke-OSDCloud
-If ($WIN10 -eq 'v20H2') {
+If ($global:WIN10 -eq 'v20H2') {
     Write-Host -ForegroundColor Cyan 'Selected v20H2'
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI'
     Start-Process powershell -ArgumentList "-noexit -command invoke-command -scriptblock {$Global:Command}" -Wait
-} Elseif ($WIN10 -eq 'v1909') {
+} Elseif ($global:WIN10ALT -eq 'v1909') {
     Write-Host -ForegroundColor Cyan 'Selected v1909'
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI'
     Start-Process powershell -ArgumentList "-noexit -command invoke-command -scriptblock {$Global:Command}" -Wait
