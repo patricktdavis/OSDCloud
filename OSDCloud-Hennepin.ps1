@@ -101,7 +101,7 @@ function Invoke-NewBoxHD {
     $OSSelection.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
     [void] $OSSelection.Items.Add('Windows 10 v20H2')
-    [void] $OSSelection.Items.Add('Windows 10 v1909')
+    [void] $OSSelection.Items.Add('HCSO – Windows 10 v 1909')
     $OSSelection.SetSelected(0,$true)  > $Null
     $PopupBox.Controls.Add($OSSelection)
 
@@ -132,7 +132,7 @@ function Invoke-NewBoxHD {
             return $WIN10
         }
 
-        if ($Selection -eq 'Windows 10 v1909') {
+        if ($Selection -eq 'HCSO – Windows 10 v 1909') {
             $WIN10
             return $WIN10 = 'v1909'
         }
@@ -222,7 +222,7 @@ function Invoke-NewBox4k {
     $OSSelection.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
     [void] $OSSelection.Items.Add('Windows 10 v20H2')
-    [void] $OSSelection.Items.Add('Windows 10 v1909')
+    [void] $OSSelection.Items.Add('HCSO – Windows 10 v 1909')
     $OSSelection.SetSelected(0,$true)  > $Null
     $PopupBox.Controls.Add($OSSelection)
 
@@ -253,7 +253,7 @@ function Invoke-NewBox4k {
             return $WIN10
         }
 
-        if ($Selection -eq 'Windows 10 v1909') {
+        if ($Selection -eq 'HCSO – Windows 10 v 1909') {
             #Write-Output $WIN10 = 'v1909'
             $WIN10 = 'v1909'
             return $WIN10
