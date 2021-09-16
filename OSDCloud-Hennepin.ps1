@@ -128,11 +128,13 @@ function Invoke-NewBoxHD {
         $Selection = $OSSelection.SelectedItem
 
         if ($Selection -eq 'Windows 10 v20H2') {
-            Write-Output $WIN10 = 'v20H2'
+            $WIN10 = 'v20H2'
+            return $WIN10
         }
 
         if ($Selection -eq 'Windows 10 v1909') {
-            Write-Output $WIN10ALT = 'v1909'
+            $WIN10
+            return $WIN10 = 'v1909'
         }
     }
 }
@@ -247,11 +249,14 @@ function Invoke-NewBox4k {
         $Selection = $OSSelection.SelectedItem
 
         if ($Selection -eq 'Windows 10 v20H2') {
-            Write-Output $WIN10 = 'v20H2'
+            $WIN10 = 'v20H2'
+            return $WIN10
         }
 
         if ($Selection -eq 'Windows 10 v1909') {
-            Write-Output $WIN10 = 'v1909'
+            #Write-Output $WIN10 = 'v1909'
+            $WIN10 = 'v1909'
+            return $WIN10
         }
     }
 }
@@ -305,28 +310,14 @@ function Invoke-OSDCloud {
 #=============================================================================
 
 Invoke-OSDCloud
-if ($WIN10 -eq 'v20H2') {
-    #Installing latest OSD Content
-    #Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
-    #Install-Module OSD -Force -AllowClobber -Verbose
-
-    # Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
-    #Import-Module OSD -Force -Verbose
+If ($WIN10 -eq 'v20H2') {
     Write-Host -ForegroundColor Cyan 'v20H2'
-    #Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI'
-    Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}" -Wait
-} elseif ($WIN10 -eq 'v1909') {
-    #Installing latest OSD Content
-    #Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
-    #Install-Module OSD -Force -AllowClobber -Verbose
-
-    #Write-Host -ForegroundColor Cyan 'Importing OSD PowerShell Module'
-    #Import-Module OSD -Force -Verbose
+    Start-Process powershell -ArgumentList "-noexit -command invoke-command -scriptblock {$Global:Command}" -Wait
+} Elseif ($WIN10 -eq 'v1909') {
     Write-Host -ForegroundColor Cyan 'v1909'
-    #Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI'
-    Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}" -Wait
+    Start-Process powershell -ArgumentList "-noexit -command invoke-command -scriptblock {$Global:Command}" -Wait
 }
 #Restart from WinPE
 Write-Host -ForegroundColor Cyan 'Restarting in 20 seconds!'
