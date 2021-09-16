@@ -315,7 +315,7 @@ if ($WIN10 = 'v20H2') {
     Write-Host -ForegroundColor Cyan 'v20H2'
     #Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI'
-    Start-Process powershell -ArgumentList "-noexit -command invoke-command -scriptblock {$Global:Command}"
+    Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}"
 } elseif ($WIN10 = 'v1909') {
     #Installing latest OSD Content
     #Write-Host -ForegroundColor Cyan 'Updating OSD PowerShell Module'
@@ -326,7 +326,7 @@ if ($WIN10 = 'v20H2') {
     Write-Host -ForegroundColor Cyan 'v1909'
     #Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI'
-    Start-Process powershell -ArgumentList "-noexit -command invoke-command -scriptblock {$Global:Command}"
+    Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}"
 }
 #Restart from WinPE
 Write-Host -ForegroundColor Cyan 'Restarting in 20 seconds!'
