@@ -16,12 +16,6 @@ PS C:\> OSDCloud-Hennepin.ps1
 $OS = 'Windows 10 Enterprise 20H2'
 $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
 
-#turning off quick edit
-Set-Location HKCU:\Console
-Set-Location ‘.%SystemRoot%_System32_WindowsPowerShell_v1.0_Powershell.exe’
-Set-ItemProperty . QuickEdit –Value 0x00000000
-Set-Location X:
-
 #=============================================================================
 #region FUNCTIONS
 #=============================================================================
