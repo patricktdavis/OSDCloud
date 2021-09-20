@@ -20,7 +20,7 @@ $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
 Set-Location HKCU:\Console
 Set-Location ‘.%SystemRoot%_System32_WindowsPowerShell_v1.0_Powershell.exe’
 Set-ItemProperty . QuickEdit –Value 0x00000000
-x:
+Set-Location X:
 
 #=============================================================================
 #region FUNCTIONS
@@ -319,8 +319,7 @@ function Invoke-OSDCloud {
 Invoke-OSDCloud
 If ($global:WIN10 -eq 'v20H2') {
     Write-Host -ForegroundColor Cyan 'Selected v20H2'
-    $Global:Command = '
-    Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI'
+    $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI'
     Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}" -Wait
 } Elseif ($global:WIN10ALT -eq 'v1909') {
     Write-Host -ForegroundColor Cyan 'Selected v1909'
