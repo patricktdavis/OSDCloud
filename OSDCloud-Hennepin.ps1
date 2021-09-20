@@ -589,8 +589,8 @@ If ($global:WIN10 -eq 'v20H2') {
     $Global:Command = '
 
     # C# needed for Set-ConsoleFont function
-if (-not (''Windows.Native.Kernel32'' -as [type])) {
-    Add-Type -TypeDefinition @''
+if (-not ('Windows.Native.Kernel32' -as [type])) {
+    Add-Type -TypeDefinition @'
     namespace Windows.Native
     {
       using System;
@@ -737,12 +737,12 @@ if (-not (''Windows.Native.Kernel32'' -as [type])) {
         }
       }
     }
-    ''@
+    '@
 }
 
 # C# needed to disable quick edit settings
 
-$QuickEditCodeSnippet = @''
+$QuickEditCodeSnippet = @'
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -802,7 +802,7 @@ public static bool SetQuickEdit(bool SetEnabled)
 }
 }
 
-''@
+'@
 
 $QuickEditMode = Add-Type -TypeDefinition $QuickEditCodeSnippet -Language CSharp
 
