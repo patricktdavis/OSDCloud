@@ -483,7 +483,6 @@ function Invoke-OSDCloud {
         Set-DisRes 1080p
     }
 
-    Set-QuickEdit -DisableQuickEdit
     Set-ConsoleFont -Name 'Lucida Console' -Height '36'
 
     Add-Type -AssemblyName System.Windows.Forms
