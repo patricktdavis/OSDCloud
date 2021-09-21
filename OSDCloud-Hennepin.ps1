@@ -103,7 +103,7 @@ function Invoke-NewBoxHD {
 
     $OSSelection = New-Object system.Windows.Forms.ListBox
     $OSSelection.text = 'ListBox'
-    $OSSelection.width = 400
+    $OSSelection.width = 500
     $OSSelection.height = 200
     $OSSelection.location = New-Object System.Drawing.Point(30,444)
     $OSSelection.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
