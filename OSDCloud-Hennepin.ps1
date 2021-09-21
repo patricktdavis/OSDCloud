@@ -22,7 +22,7 @@ Set-ItemProperty . QuickEdit -Value 0x00000000
 Set-ItemProperty . FaceName -type STRING -value ''Lucida Console''
 Set-ItemProperty . FontSize -type DWORD -value 0x00240000
 Set-ItemProperty . FontWeight -type DWORD -value 0x00000190'
-Start-Process powershell -ArgumentList "-noexit -command invoke-command -scriptblock {$Global:Command1}" -Wait
+Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command1}" -Wait
 
 #=============================================================================
 #region FUNCTIONS
