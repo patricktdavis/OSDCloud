@@ -18,7 +18,7 @@ $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
 
 $Global:Command = 'Set-Location HKCU:\Console
 Set-Location ''%SystemRoot%_System32_WindowsPowerShell_v1.0_Powershell.exe''
-Set-ItemProperty . QuickEdit –Value 0x00000000'
+Set-ItemProperty . QuickEdit -Value 0x00000000'
 Start-Process powershell -ArgumentList "-noexit -command invoke-command -scriptblock {$Global:Command}" -Wait
 
 #=============================================================================
