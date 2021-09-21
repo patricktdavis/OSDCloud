@@ -486,7 +486,7 @@ function Set-ConsoleFont
   [Windows.Native.Kernel32]::SetCurrentConsoleFontEx($cfi)
 }
 
-Set-ConsoleFont -Name ''Lucida Console'' -Height ''20''
+Set-ConsoleFont -Name Consolas -Height 20
     
     Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI'
     Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}" -Wait
