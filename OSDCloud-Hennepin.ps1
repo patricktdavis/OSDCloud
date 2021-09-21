@@ -322,7 +322,7 @@ Invoke-OSDCloud
 If ($global:WIN10 -eq 'v20H2') {
     Write-Host -ForegroundColor Cyan 'Selected v20H2'
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI'
-    Start-Process powershell -ArgumentList "-noexit -command invoke-command -scriptblock {$Global:Command}" -Wait
+    Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}" -Wait
 } Elseif ($global:WIN10ALT -eq 'v1909') {
     Write-Host -ForegroundColor Cyan 'Selected v1909'
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI'
