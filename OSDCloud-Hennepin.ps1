@@ -16,10 +16,10 @@ PS C:\> OSDCloud-Hennepin.ps1
 $OS = 'Windows 10 Enterprise 20H2'
 $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
 
-$Global:Command = 'Set-Location HKCU:\Console
+$Global:Command1 = 'Set-Location HKCU:\Console
 Set-Location ''%SystemRoot%_System32_WindowsPowerShell_v1.0_Powershell.exe''
 Set-ItemProperty . QuickEdit -Value 0x00000000'
-Start-Process powershell -ArgumentList "-noexit -command invoke-command -scriptblock {$Global:Command}" -Wait
+Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command1}" -Wait
 
 #=============================================================================
 #region FUNCTIONS
@@ -489,7 +489,7 @@ function Set-ConsoleFont
 Set-ConsoleFont -Name Consolas -Height 20
     
     Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI'
-    Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}" -Wait
+    Start-Process powershell -ArgumentList "-noexit -command invoke-command -scriptblock {$Global:Command}" -Wait
 } Elseif ($global:WIN10ALT -eq 'v1909') {
     Write-Host -ForegroundColor Cyan 'Selected v1909'
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI'
