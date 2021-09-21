@@ -18,8 +18,11 @@ $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
 
 $Global:Command1 = 'Set-Location HKCU:\Console
 Set-Location ''%SystemRoot%_System32_WindowsPowerShell_v1.0_Powershell.exe''
-Set-ItemProperty . QuickEdit -Value 0x00000000'
-Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command1}" -Wait
+Set-ItemProperty . QuickEdit -Value 0x00000000
+Set-ItemProperty . FaceName -type STRING -value ''Lucida Console''
+Set-ItemProperty . FontSize -type DWORD -value 0x00240000
+Set-ItemProperty . FontWeight -type DWORD -value 0x00000190'
+Start-Process powershell -ArgumentList "-noexit -command invoke-command -scriptblock {$Global:Command1}" -Wait
 
 #=============================================================================
 #region FUNCTIONS
