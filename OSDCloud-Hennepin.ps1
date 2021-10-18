@@ -323,10 +323,29 @@ If ($global:WIN10 -eq 'v20H2') {
     Write-Host -ForegroundColor Cyan 'Selected v20H2'
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI'
     Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}" -Wait
+
+    If (Test-Path "C:\OSDCloud\") {
+    $file = "C:\OSDCloud\Add.ps1"
+    New-Item $file -ItemType File -Value "Set-ExecutionPolicy -ExecutionPolicy Bypass" -Force
+    Add-Content $file "Set-PSRepository -name psgallery -InstallationPolicy Trusted"
+    Add-Content $file "Install-Script get-windowsautopilotinfo"
+    Add-Content $file "Get-Module microsoft.graph.intune"
+    Add-Content $file "Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG"
+    }
+
 } Elseif ($global:WIN10ALT -eq 'v1909') {
     Write-Host -ForegroundColor Cyan 'Selected v1909'
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI'
     Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}" -Wait
+
+    If (Test-Path "C:\OSDCloud\") {
+    $file = "C:\OSDCloud\Add.ps1"
+    New-Item $file -ItemType File -Value "Set-ExecutionPolicy -ExecutionPolicy Bypass" -Force
+    Add-Content $file "Set-PSRepository -name psgallery -InstallationPolicy Trusted"
+    Add-Content $file "Install-Script get-windowsautopilotinfo"
+    Add-Content $file "Get-Module microsoft.graph.intune"
+    Add-Content $file "Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG"
+    }
 }
 #Restart from WinPE
 Write-Host -ForegroundColor Cyan 'Restarting in 20 seconds!'
