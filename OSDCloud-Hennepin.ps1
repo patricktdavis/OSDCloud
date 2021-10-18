@@ -326,12 +326,12 @@ If ($global:WIN10 -eq 'v20H2') {
 
     If (Test-Path "C:\OSDCloud\") {
         $file = "C:\OSDCloud\Add.ps1"
-        New-Item $file -ItemType File -Force -Value "Set-ExecutionPolicy -ExecutionPolicy Bypass -Verbose"
+        New-Item $file -ItemType File -Force -Value "Set-ExecutionPolicy -ExecutionPolicy Bypass"
         Add-Content $file ""
-        Add-Content $file "Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose"
-        Add-Content $file "Install-Script Get-WindowsAutoPilotInfo -Verbose"
-        Add-Content $file "Get-Module Microsoft.Graph.Intune -Verbose"
-        Add-Content $file "Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG -Verbose"
+        Add-Content $file "Set-PSRepository -Name PSGallery -InstallationPolicy Trusted"
+        Add-Content $file "Install-Script Get-WindowsAutoPilotInfo"
+        Add-Content $file "Get-Module Microsoft.Graph.Intune"
+        Add-Content $file "Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG"
         }
 
 } Elseif ($global:WIN10ALT -eq 'v1909') {
@@ -341,12 +341,12 @@ If ($global:WIN10 -eq 'v20H2') {
 
     If (Test-Path "C:\OSDCloud\") {
         $file = "C:\OSDCloud\Add.ps1"
-        New-Item $file -ItemType File -Force -Value "Set-ExecutionPolicy -ExecutionPolicy Bypass -Verbose"
+        New-Item $file -ItemType File -Force -Value "Set-ExecutionPolicy -ExecutionPolicy Bypass"
         Add-Content $file ""
-        Add-Content $file "Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose"
-        Add-Content $file "Install-Script Get-WindowsAutoPilotInfo -Verbose"
-        Add-Content $file "Get-Module Microsoft.Graph.Intune -Verbose"
-        Add-Content $file "Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG -Verbose"
+        Add-Content $file "Set-PSRepository -Name PSGallery -InstallationPolicy Trusted"
+        Add-Content $file "Install-Script Get-WindowsAutoPilotInfo"
+        Add-Content $file "Get-Module Microsoft.Graph.Intune"
+        Add-Content $file "Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG"
         }
 }
 #Restart from WinPE
