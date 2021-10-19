@@ -326,11 +326,11 @@ If ($global:WIN10 -eq 'v20H2') {
 
     If (Test-Path 'C:\OSDCloud\') {
         $PSCode = '
-        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-        Install-Script Get-WindowsAutoPilotInfo
-        Get-Module Microsoft.Graph.Intune
-        Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG
-        '
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+Install-Script Get-WindowsAutoPilotInfo
+Get-Module Microsoft.Graph.Intune
+Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG
+'
         New-Item -Path 'C:\OSDCloud\' -Name Add.ps1 -Value "$PSCode" -Force
     }
 
@@ -341,11 +341,11 @@ If ($global:WIN10 -eq 'v20H2') {
 
     If (Test-Path 'C:\OSDCloud\') {
         $PSCode = '
-        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-        Install-Script Get-WindowsAutoPilotInfo
-        Get-Module Microsoft.Graph.Intune
-        Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG
-        '
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+Install-Script Get-WindowsAutoPilotInfo
+Get-Module Microsoft.Graph.Intune
+Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG
+'
         New-Item -Path 'C:\OSDCloud\' -Name Add.ps1 -Value "$PSCode" -Force
     }
 }
