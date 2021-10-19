@@ -324,30 +324,30 @@ If ($global:WIN10 -eq 'v20H2') {
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI'
     Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}" -Wait
 
-    If (Test-Path "C:\OSDCloud\") {
-        $file = "C:\OSDCloud\Add.ps1"
-        New-Item $file -ItemType File -Force -Value "Set-ExecutionPolicy -ExecutionPolicy Bypass"
-        Add-Content $file ""
-        Add-Content $file "Set-PSRepository -Name PSGallery -InstallationPolicy Trusted"
-        Add-Content $file "Install-Script Get-WindowsAutoPilotInfo"
-        Add-Content $file "Get-Module Microsoft.Graph.Intune"
-        Add-Content $file "Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG"
-        }
+    If (Test-Path 'C:\OSDCloud\') {
+        $PSCode = '
+        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+        Install-Script Get-WindowsAutoPilotInfo
+        Get-Module Microsoft.Graph.Intune
+        Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG
+        '
+        New-Item -Path 'C:\OSDCloud\' -Name Add.ps1 -Value "$PSCode" -Force
+    }
 
 } Elseif ($global:WIN10ALT -eq 'v1909') {
     Write-Host -ForegroundColor Cyan 'Selected v1909'
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI'
     Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}" -Wait
 
-    If (Test-Path "C:\OSDCloud\") {
-        $file = "C:\OSDCloud\Add.ps1"
-        New-Item $file -ItemType File -Force -Value "Set-ExecutionPolicy -ExecutionPolicy Bypass"
-        Add-Content $file ""
-        Add-Content $file "Set-PSRepository -Name PSGallery -InstallationPolicy Trusted"
-        Add-Content $file "Install-Script Get-WindowsAutoPilotInfo"
-        Add-Content $file "Get-Module Microsoft.Graph.Intune"
-        Add-Content $file "Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG"
-        }
+    If (Test-Path 'C:\OSDCloud\') {
+        $PSCode = '
+        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+        Install-Script Get-WindowsAutoPilotInfo
+        Get-Module Microsoft.Graph.Intune
+        Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG
+        '
+        New-Item -Path 'C:\OSDCloud\' -Name Add.ps1 -Value "$PSCode" -Force
+    }
 }
 #Restart from WinPE
 Write-Host -ForegroundColor Cyan 'Restarting in 20 seconds!'
