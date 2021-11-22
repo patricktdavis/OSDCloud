@@ -348,6 +348,7 @@ Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG -Verbose
 '
         New-Item -Path 'C:\OSDCloud\' -Name Add.ps1 -Value "$PSCode" -Force
     }
+
     If (Test-Path 'C:\OSDCloud\') {
         $PSCode1 = '
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose
