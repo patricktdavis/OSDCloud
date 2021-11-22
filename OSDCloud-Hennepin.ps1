@@ -341,12 +341,21 @@ Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG
 
     If (Test-Path 'C:\OSDCloud\') {
         $PSCode = '
-Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-Install-Script Get-WindowsAutoPilotInfo
-Get-Module Microsoft.Graph.Intune
-Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose
+Install-Script -Name Get-WindowsAutoPilotInfo -Verbose
+Get-Module Microsoft.Graph.Intune -Verbose
+Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG -Verbose
 '
         New-Item -Path 'C:\OSDCloud\' -Name Add.ps1 -Value "$PSCode" -Force
+    }
+    If (Test-Path 'C:\OSDCloud\') {
+        $PSCode1 = '
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose
+Install-Script Install-Script -Name Get-AutopilotDiagnostics -Verbose
+Get-Module Microsoft.Graph.Intune -Verbose
+Get-AutopilotDiagnostics -Online -Verbose
+'
+        New-Item -Path 'C:\OSDCloud\' -Name Ap.ps1 -Value "$PSCode1" -Force
     }
 }
 #Restart from WinPE
