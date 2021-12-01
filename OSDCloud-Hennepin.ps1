@@ -334,6 +334,16 @@ Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG
         New-Item -Path 'C:\OSDCloud\' -Name Add.ps1 -Value "$PSCode" -Force
     }
 
+    If (Test-Path 'C:\OSDCloud\') {
+        $PSCode1 = '
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose
+Install-Script Install-Script -Name Get-AutopilotDiagnostics -Verbose
+Get-Module Microsoft.Graph.Intune -Verbose
+Get-AutopilotDiagnostics -Online -Verbose
+'
+        New-Item -Path 'C:\OSDCloud\' -Name Ap.ps1 -Value "$PSCode1" -Force
+    }
+
 } Elseif ($global:WIN10ALT -eq 'v1909') {
     Write-Host -ForegroundColor Cyan 'Selected v1909'
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 1909 -OSEdition Enterprise -ZTI'
