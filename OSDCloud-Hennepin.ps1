@@ -337,7 +337,7 @@ Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG
     If (Test-Path 'C:\OSDCloud\') {
         $PSCode1 = '
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose
-Install-Script Install-Script -Name Get-AutopilotDiagnostics -Verbose
+Install-Script -Name Get-AutopilotDiagnostics -Verbose
 Get-Module Microsoft.Graph.Intune -Verbose
 Get-AutopilotDiagnostics -Online -Verbose
 '
@@ -362,7 +362,7 @@ Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG -Verbose
     If (Test-Path 'C:\OSDCloud\') {
         $PSCode1 = '
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose
-Install-Script Install-Script -Name Get-AutopilotDiagnostics -Verbose
+Install-Script -Name Get-AutopilotDiagnostics -Verbose
 Get-Module Microsoft.Graph.Intune -Verbose
 Get-AutopilotDiagnostics -Online -Verbose
 '
