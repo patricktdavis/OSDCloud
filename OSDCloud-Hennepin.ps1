@@ -108,7 +108,7 @@ function Invoke-NewBoxHD {
     $OSSelection.location = New-Object System.Drawing.Point(30,444)
     $OSSelection.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
-    [void] $OSSelection.Items.Add('Windows 10 v20H2')
+    [void] $OSSelection.Items.Add('Windows 10 v21H2')
     [void] $OSSelection.Items.Add('HCSO Windows 10 v1909')
     $OSSelection.SetSelected(0,$true)  > $Null
     $PopupBox.Controls.Add($OSSelection)
@@ -135,8 +135,8 @@ function Invoke-NewBoxHD {
     If ($Result -eq [System.Windows.Forms.DialogResult]::OK) {
         $Selection = $OSSelection.SelectedItem
 
-        if ($Selection -eq 'Windows 10 v20H2') {
-            $global:WIN10 = 'v20H2'
+        if ($Selection -eq 'Windows 10 v21H2') {
+            $global:WIN10 = 'v21H2'
             $global:WIN10ALT = $Null
         }
 
@@ -229,7 +229,7 @@ function Invoke-NewBox4k {
     $OSSelection.location = New-Object System.Drawing.Point(30,950)
     $OSSelection.Font = New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Italic))
 
-    [void] $OSSelection.Items.Add('Windows 10 v20H2')
+    [void] $OSSelection.Items.Add('Windows 10 v21H2')
     [void] $OSSelection.Items.Add('HCSO Windows 10 v1909')
     $OSSelection.SetSelected(0,$true)  > $Null
     $PopupBox.Controls.Add($OSSelection)
@@ -256,8 +256,8 @@ function Invoke-NewBox4k {
     If ($Result -eq [System.Windows.Forms.DialogResult]::OK) {
         $Selection = $OSSelection.SelectedItem
 
-        if ($Selection -eq 'Windows 10 v20H2') {
-            $global:WIN10 = 'v20H2'
+        if ($Selection -eq 'Windows 10 v20H1') {
+            $global:WIN10 = 'v20H1'
             $global:WIN10ALT = $Null
         }
 
@@ -319,9 +319,9 @@ function Invoke-OSDCloud {
 #=============================================================================
 
 Invoke-OSDCloud
-If ($global:WIN10 -eq 'v20H2') {
-    Write-Host -ForegroundColor Cyan 'Selected v20H2'
-    $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI'
+If ($global:WIN10 -eq 'v21H2') {
+    Write-Host -ForegroundColor Cyan 'Selected v21H2'
+    $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 21H2 -OSEdition Enterprise -ZTI'
     Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}" -Wait
 
     If (Test-Path 'C:\OSDCloud\') {
