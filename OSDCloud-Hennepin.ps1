@@ -256,8 +256,8 @@ function Invoke-NewBox4k {
     If ($Result -eq [System.Windows.Forms.DialogResult]::OK) {
         $Selection = $OSSelection.SelectedItem
 
-        if ($Selection -eq 'Windows 10 v20H1') {
-            $global:WIN10 = 'v20H1'
+        if ($Selection -eq 'Windows 10 v21H2') {
+            $global:WIN10 = 'v21H2'
             $global:WIN10ALT = $Null
         }
 
