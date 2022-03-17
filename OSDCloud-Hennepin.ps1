@@ -13,7 +13,7 @@ PS C:\> OSDCloud-Hennepin.ps1
 #endregion
 #=============================================================================
 
-$OS = 'Windows 10 Enterprise 20H2'
+$OS = 'Windows 10 Enterprise 21H2'
 $Serial = (Get-CimInstance -ClassName Win32_BIOS).SerialNumber
 
 $Global:Command1 = 'Set-Location HKCU:\Console
