@@ -324,51 +324,47 @@ If ($global:WIN10 -eq 'v21H2') {
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 21H2 -OSEdition Enterprise -ZTI'
     Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}" -Wait
 
-    If (Test-Path 'C:\OSDCloud\') {
-        $PSCode = '
-Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-Install-Script Get-WindowsAutoPilotInfo
-Get-Module Microsoft.Graph.Intune
-Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG
-'
-        New-Item -Path 'C:\OSDCloud\' -Name Add.ps1 -Value "$PSCode" -Force
-    }
-
-    If (Test-Path 'C:\OSDCloud\') {
-        $PSCode1 = '
-Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose
-Install-Script -Name Get-AutopilotDiagnostics -Verbose
-Get-Module Microsoft.Graph.Intune -Verbose
-Get-AutopilotDiagnostics -Online -Verbose
-'
-        New-Item -Path 'C:\OSDCloud\' -Name Ap.ps1 -Value "$PSCode1" -Force
-    }
-
 } Elseif ($global:WIN10ALT -eq 'v20H2') {
     Write-Host -ForegroundColor Cyan 'Selected v20H2'
     $Global:Command = 'Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Enterprise -ZTI'
     Start-Process powershell -ArgumentList "-command invoke-command -scriptblock {$Global:Command}" -Wait
+}
 
-    If (Test-Path 'C:\OSDCloud\') {
-        $PSCode = '
+#Creating Different Support scripts
+If (Test-Path 'C:\OSDCloud\') {
+    $PSCodeHCGG = '
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose
 Install-Script -Name Get-WindowsAutoPilotInfo -Verbose
 Get-Module Microsoft.Graph.Intune -Verbose
 Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCGG -Verbose
 '
-        New-Item -Path 'C:\OSDCloud\' -Name Add.ps1 -Value "$PSCode" -Force
-    }
+    New-Item -Path 'C:\OSDCloud\' -Name AddHCGG.ps1 -Value "$PSCodeHCGG" -Force
 
-    If (Test-Path 'C:\OSDCloud\') {
-        $PSCode1 = '
+    $PSCodeHCSO = '
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose
+Install-Script -Name Get-WindowsAutoPilotInfo -Verbose
+Get-Module Microsoft.Graph.Intune -Verbose
+Get-WindowsAutopilotInfo.ps1 -Online -GroupTag HCSO -Verbose
+'
+    New-Item -Path 'C:\OSDCloud\' -Name AddHCSO.ps1 -Value "$PSCodeHCSO" -Force
+
+    $PSCodeLIBACF = '
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose
+Install-Script -Name Get-WindowsAutoPilotInfo -Verbose
+Get-Module Microsoft.Graph.Intune -Verbose
+Get-WindowsAutopilotInfo.ps1 -Online -GroupTag LIBACF -Verbose
+'
+    New-Item -Path 'C:\OSDCloud\' -Name AddLIBACF.ps1 -Value "$PSCodeLIBACF" -Force
+
+    $PSCodeAp = '
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted -Verbose
 Install-Script -Name Get-AutopilotDiagnostics -Verbose
 Get-Module Microsoft.Graph.Intune -Verbose
 Get-AutopilotDiagnostics -Online -Verbose
 '
-        New-Item -Path 'C:\OSDCloud\' -Name Ap.ps1 -Value "$PSCode1" -Force
-    }
+    New-Item -Path 'C:\OSDCloud\' -Name Ap.ps1 -Value "$PSCodeAp" -Force
 }
+
 #Restart from WinPE
 Write-Host -ForegroundColor Cyan 'Restarting in 20 seconds!'
 Start-Sleep -Seconds 20
